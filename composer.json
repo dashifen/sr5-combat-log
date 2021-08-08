@@ -1,0 +1,21 @@
+{
+  "name": "dashifen/sr5-combat-log",
+  "description": "A small app that Dash uses to keep track of combats during Shadowrun 5th Edition games.",
+  "minimum-stability": "stable",
+  "license": "raisely/NoHarm",
+  "authors": [
+    {
+      "name": "David Dashifen Kees",
+      "email": "dashifen@dashifen.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Dashifen\\CombatLog\\": "src"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}

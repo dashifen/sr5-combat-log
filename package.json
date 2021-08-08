@@ -1,0 +1,26 @@
+{
+  "license": "raisely/NoHarm",
+  "name": "dashifen-sr5-combat-log",
+  "description": "A small app that Dash uses to keep track of combats during Shadworun 5th Edition.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashifen/sr5-combat-log.git"
+  },
+  "author": "David Dashifen Kees <dashifen@dashifen.com>",
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0",
+    "axios": "^0.21",
+    "css-loader": "^6.2",
+    "file-loader": "^6.0",
+    "mini-css-extract-plugin": "^2.2",
+    "url-loader": "^4.1",
+    "vue": "^3.0",
+    "vue-loader": "^16.2",
+    "webpack": "^5.38",
+    "webpack-cli": "^4.7"
+  },
+  "scripts": {
+    "watch": "webpack --env development --watch",
+    "build": "webpack --env production"
+  }
+}
