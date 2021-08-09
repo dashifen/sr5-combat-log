@@ -39,6 +39,14 @@ module.exports = (env = {production: false}) => ({
           },
           'css-loader'
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
