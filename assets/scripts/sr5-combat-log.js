@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Sylvie',
         'Zee'
       ],
-      "actions": {
+      "interrupts": {
         "Block": 5,
         "Counterstrike": 7,
         "Dive for Cover": 5,

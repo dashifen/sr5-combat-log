@@ -2,14 +2,14 @@
 export default {
   name: 'character',
 
-  props: ['character', 'player'],
+  props: ['character', 'interrupts', 'player'],
 
   data() {
     return {
       init: "2",
       dice: "1",
       spent: new Array(6).fill(false),
-      interrupts: 0,
+      interruptions: 0,
       damage: 0,
     };
   },
@@ -25,15 +25,22 @@ export default {
     },
 
     actions() {
-      return Math.ceil(this.roll / 10);
+      return Math.ceil(this.initiative / 10);
     },
 
     initiative() {
       let initiative = this.roll;
       initiative -= 10 * this.spent.filter(spent => spent).length;
       initiative -= Math.floor(this.damage / 3);
-      initiative -= this.interrupts;
+      initiative -= Number(this.interruptions);
       return initiative;
+    }
+  },
+
+  methods: {
+    interrupt(event) {
+      this.interruptions += Number(event.target.options[event.target.selectedIndex].value);
+      setTimeout(() => event.target.selectedIndex = 0, 500);
     }
   }
 };
@@ -48,7 +55,12 @@ export default {
     <td headers="actions">
       <input v-for="i in actions" type="checkbox" v-model="spent[(i-1)]">
     </td>
-    <td headers="interrupts"></td>
+    <td headers="interrupts">
+      <select @change="interrupt">
+        <option value="0"></option>
+        <option v-for="(cost, action) in interrupts" :value="cost" v-text="action"></option>
+      </select>
+    </td>
     <td headers="damage"><input type="number" v-model="damage" min="0" max="20"></td>
     <td headers="initiative" v-text="initiative"></td>
     <td headers="notes"></td>

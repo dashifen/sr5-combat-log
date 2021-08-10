@@ -3,7 +3,7 @@ import character from './character.vue';
 
 export default {
   name: 'combat-log',
-  props: ['pcs','actions'],
+  props: ['pcs','interrupts'],
   components: { character },
   data() {
     return {
@@ -29,7 +29,11 @@ export default {
     </tr>
     </thead>
     <tbody>
-      <tr is="vue:character" v-for="character in pcs" :character="character" :player="true"></tr>
+      <tr is="vue:character" v-for="character in pcs"
+          :interrupts="interrupts"
+          :character="character"
+          :player="true">
+      </tr>
     </tbody>
   </table>
 
