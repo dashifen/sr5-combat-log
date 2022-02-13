@@ -2,12 +2,10 @@
 export default {
   name: 'character',
 
-  props: ['character', 'interrupts', 'player'],
+  props: ['dataCharacter', 'dataIndex'],
 
   data() {
     return {
-      init: "2",
-      dice: "1",
       spent: new Array(6).fill(false),
       interruptions: 0,
       damage: 0,
@@ -15,54 +13,101 @@ export default {
   },
 
   computed: {
-    roll() {
-      let sum = Number(this.init);
-      for (let i = 0; i < this.dice; i++) {
-        sum += Math.floor(Math.random() * 6) + 1;
-      }
-
-      return sum;
+    character() {
+      return this.$store.getters.character(this.dataIndex);
     },
 
-    actions() {
-      return Math.ceil(this.initiative / 10);
-    },
-
-    initiative() {
-      let initiative = this.roll;
-      initiative -= 10 * this.spent.filter(spent => spent).length;
-      initiative -= Math.floor(this.damage / 3);
-      initiative -= Number(this.interruptions);
-      return initiative;
+    isPlayer() {
+      return this.character.type === 'pc';
     }
   },
 
   methods: {
+    setInitiative(event) {
+      this.commitChange('initiative', event.target.value);
+    },
+
+    commitChange(property, value) {
+      this.$store.commit('setCharacterProperty', {
+        index: this.dataIndex,
+        property: property,
+        value: value,
+      });
+    },
+
+    setDice(event) {
+      this.commitChange('dice', event.target.value);
+    },
+
+    setRoll(event) {
+      this.commitChange('roll', event.target.value);
+    },
+
     interrupt(event) {
-      this.interruptions += Number(event.target.options[event.target.selectedIndex].value);
-      setTimeout(() => event.target.selectedIndex = 0, 500);
+      setTimeout(() => event.target.selectedIndex = 0, 1500);
+      const cost = Number(event.target.options[event.target.selectedIndex].value);
+      const current = this.$store.state.characters[this.dataIndex].interrupts;
+      this.commitChange('interrupts', current + cost);
+    },
+
+    setDamage(event) {
+      this.commitChange('damage', event.target.value);
+    },
+
+    removeCharacter(characterName) {
+      if (confirm('Remove ' + characterName + '?')) {
+        this.$store.commit('removeCharacter', characterName);
+      }
     }
   }
 };
 </script>
 
 <template>
-  <tr :type="player ? 'pc' : 'npc'">
-    <td headers="character">{{ character }}</td>
-    <td headers="init"><input type="number" v-model="init" min="2" max="25" step="1"></td>
-    <td headers="dice"><input type="number" v-model="dice" min="1" max="5" step="1"></td>
-    <td headers="roll"><input type="text" :value="roll" min="0" max="55" step="1"></td>
-    <td headers="actions">
-      <input v-for="i in actions" type="checkbox" v-model="spent[(i-1)]">
+  <tr :data-type="isPlayer ? 'pc' : 'npc'">
+    <td headers="character" v-text="dataCharacter.name"></td>
+    <td headers="init"><input type="number" :value="this.character.initiative"
+        @change="setInitiative" min="2" max="25" step="1" :disabled="isPlayer">
     </td>
+    <td headers="dice"><input type="number" :value="this.character.dice"
+        @change="setDice" min="1" max="5" step="1" :disabled="isPlayer">
+    </td>
+    <td headers="roll"><input type="text" :value="this.character.roll"
+        @change="setRoll" :disabled="!isPlayer"></td>
+    <td headers="acted"><input type="checkbox" tabindex="-1"></td>
     <td headers="interrupts">
-      <select @change="interrupt">
+      <select @change="interrupt" tabindex="-1">
         <option value="0"></option>
-        <option v-for="(cost, action) in interrupts" :value="cost" v-text="action"></option>
+        <option v-for="(cost, action) in this.$store.state.interrupts"
+            :value="cost" tabindex="-1">
+          {{ action }} ({{ cost }})
+        </option>
       </select>
     </td>
-    <td headers="damage"><input type="number" v-model="damage" min="0" max="20"></td>
-    <td headers="initiative" v-text="initiative"></td>
-    <td headers="notes"></td>
+    <td headers="damage"><input type="number" :value="this.character.damage" @change="setDamage" min="0" max="20" tabindex="-1"></td>
+    <td headers="initiative" v-text="this.character.score"></td>
+    <td headers="remover">
+      <span class="remover" @click="removeCharacter(dataCharacter.name)">&times;</span>
+    </td>
   </tr>
 </template>
+
+<style lang="scss">
+.remover {
+  cursor: pointer;
+  display: inline-block;
+  grid-area: remover;
+  text-align: right;
+  text-decoration: underline;
+  width: 100%;
+
+  &:hover {
+    color: red;
+  }
+}
+
+input[type=number][disabled] {
+  display: none;
+}
+
+</style>

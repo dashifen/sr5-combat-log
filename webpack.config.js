@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const filename = 'sr5-combat-log.js';
+const filename = 'log.js';
 
 module.exports = (env = {production: false}) => ({
   mode: env.production ? 'production' : 'development',
@@ -10,7 +10,7 @@ module.exports = (env = {production: false}) => ({
   entry: path.resolve(__dirname, './assets/scripts/' + filename),
   output: {
     path: path.resolve(__dirname, './assets'),
-    filename: filename,
+    filename: 'sr5-combat-log.js',
     publicPath: '/assets/'
   },
   resolve: {
