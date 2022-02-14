@@ -10,6 +10,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: 0,
     },
     {
@@ -22,6 +23,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: 0,
     },
     {
@@ -34,6 +36,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: 0,
     },
     {
@@ -46,6 +49,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: 0,
     },
     {
@@ -58,6 +62,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: 0,
     },
     {
@@ -70,6 +75,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: 0,
     }
   ],
@@ -88,6 +94,7 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
+      notes: '',
       score: roll,
     };
   }

@@ -1,17 +1,7 @@
 <script>
 export default {
   name: 'character',
-
   props: ['dataCharacter', 'dataIndex'],
-
-  data() {
-    return {
-      spent: new Array(6).fill(false),
-      interruptions: 0,
-      damage: 0,
-    };
-  },
-
   computed: {
     character() {
       return this.$store.getters.character(this.dataIndex);
@@ -54,6 +44,10 @@ export default {
       this.commitChange('damage', event.target.value);
     },
 
+    setNotes(event) {
+      this.commitChange('notes', event.target.value);
+    },
+
     removeCharacter(characterName) {
       if (confirm('Remove ' + characterName + '?')) {
         this.$store.commit('removeCharacter', characterName);
@@ -66,15 +60,20 @@ export default {
 <template>
   <tr :data-type="isPlayer ? 'pc' : 'npc'">
     <td headers="character" v-text="dataCharacter.name"></td>
-    <td headers="init"><input type="number" :value="this.character.initiative"
+    <td headers="init">
+      <input type="number" :value="this.character.initiative"
         @change="setInitiative" min="2" max="25" step="1" :disabled="isPlayer">
     </td>
-    <td headers="dice"><input type="number" :value="this.character.dice"
+    <td headers="dice">
+      <input type="number" :value="this.character.dice"
         @change="setDice" min="1" max="5" step="1" :disabled="isPlayer">
     </td>
-    <td headers="roll"><input type="text" :value="this.character.roll"
+    <td headers="roll">
+      <input type="text" :value="this.character.roll"
         @change="setRoll" :disabled="!isPlayer"></td>
-    <td headers="acted"><input type="checkbox" tabindex="-1"></td>
+    <td headers="acted">
+      <input type="checkbox" tabindex="-1">
+    </td>
     <td headers="interrupts">
       <select @change="interrupt" tabindex="-1">
         <option value="0"></option>
@@ -84,8 +83,14 @@ export default {
         </option>
       </select>
     </td>
-    <td headers="damage"><input type="number" :value="this.character.damage" @change="setDamage" min="0" max="20" tabindex="-1"></td>
+    <td headers="damage">
+      <input type="number" :value="this.character.damage"
+        @change="setDamage" min="0" max="20" tabindex="-1">
+    </td>
     <td headers="initiative" v-text="this.character.score"></td>
+    <td headers="notes">
+      <input type="text" :value="this.character.notes" @change="setNotes">
+    </td>
     <td headers="remover">
       <span class="remover" @click="removeCharacter(dataCharacter.name)">&times;</span>
     </td>

@@ -4,20 +4,21 @@ import character from './character.vue';
 export default {
   name: 'combat-log',
   components: {character},
-  computed: {
-    characters() {
-      return this.$store.state.characters;
-    }
-  },
-
   methods: {
     addGoon() {
+
+      // adding a goon doesn't require a prompt; they just get a name like
+      // Human A or Ork B.
+
       this.$store.commit('addCharacter');
     },
 
     addLieutenant() {
-      const name = prompt('Enter Lieutenant');
-      this.$store.commit('addCharacter', name);
+
+      // lieutenants get some sort of name, so that might be a proper name or
+      // an archetype, so maybe Auggie or Hacker.
+
+      this.$store.commit('addCharacter', prompt('Enter Lieutenant'));
     },
 
     sort() {
@@ -44,11 +45,12 @@ export default {
       <th scope="col" id="interrupts">Interrupts</th>
       <th scope="col" id="damage">Damage</th>
       <th scope="col" id="initiative">Initiative</th>
+      <th scope="col" id="notes">Notes</th>
       <th scope="col" id="remover"></th>
     </tr>
     </thead>
     <tbody>
-    <tr is="vue:character" v-for="(character, index) in characters"
+    <tr is="vue:character" v-for="(character, index) in this.$store.state.characters"
         :data-character="character"
         :data-index="index">
     </tr>
@@ -99,6 +101,24 @@ th#initiative,
 [headers=roll] input,
 input[type=number] {
   width: 50px;
+}
+
+th#interrupts,
+[headers=interrupts] {
+  width: 200px;
+}
+
+th#acted,
+th#damage,
+th#initiative,
+[headers=acted],
+[headers=damage],
+[headers=initiative] {
+  width: 100px;
+}
+
+[headers=notes] input {
+  width: 100%;
 }
 
 button {

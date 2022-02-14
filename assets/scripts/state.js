@@ -66,6 +66,10 @@ export const state = {
      * @return void
      */
     addCharacter(state, name) {
+
+      // character code 64 is one letter before the capital A.  so when we add
+      // our Goon count too it, the get named goon A, goon B, and so on.
+
       name = name || getMetatype() + ' ' + String.fromCharCode(64 + ++state.goons);
       state.characters.push(characters.addCharacter(name));
     },
@@ -99,7 +103,9 @@ export const state = {
      */
     setCharacterProperty(state, data) {
       const character = state.characters[data.index];
-      character[data.property] = Number(data.value);
+      character[data.property] = data.property !== 'notes'
+        ? Number(data.value)
+        : data.value;
 
       // if we just changed the characters initiative or dice properties, then
       // this should trigger a reroll of their base initiative score.
@@ -110,7 +116,9 @@ export const state = {
 
       // finally, when changing a variety of properties, their effective score
       // also needs to be recalculated.  for example, when a character is
-      // damaged, it could impact their score.
+      // damaged, it could impact their score.  if this wasn't a property that
+      // would do so, then we use a bit of time to recalculate the same number,
+      // but that's okay.
 
       character.score = calculateScore(character, state.phase);
     },
@@ -127,8 +135,18 @@ export const state = {
      */
     endPhase(state) {
       recalculateScores(state.characters, ++state.phase, false);
+
+      // we run a filter on our characters, keeping the ones that have a score
+      // of zero.  then, the number that have a score of zero is the same as
+      // the total number of characters, we end the tern.
+
       const zeros = state.characters.filter(character => character.score === 0);
       if (zeros.length === state.characters.length) {
+
+        // because our assignment of the phase is in parenthesis, that happens
+        // first.  then, the side-effect of that assignment is to return the
+        // value of it, so we pass a 1 to the recalculate scores function.
+
         recalculateScores(state.characters, (state.phase = 1), true);
         alert('End of Turn');
       }
@@ -145,7 +163,7 @@ export const state = {
  * @return string
  */
 function getMetatype() {
-  const type = Math.floor(Math.random() * 100) + 1;
+  const type = d(100);
 
   if (type <= 66) {
     return 'Human';
@@ -163,6 +181,20 @@ function getMetatype() {
 }
 
 /**
+ * d
+ *
+ * Rolls a dX where X is the number of sides passed as a paramenter, e.g. d100
+ * or d6.
+ *
+ * @param sides
+ *
+ * @return number
+ */
+function d(sides) {
+  return Math.floor(Math.random() * sides) + 1
+}
+
+/**
  * roll
  *
  * Rolls a character's initiative score based on the initiative and dice
@@ -175,7 +207,7 @@ function getMetatype() {
 function roll(character) {
   let sum = Number(character.initiative);
   for (let i = 0; i < character.dice; i++) {
-    sum += Math.floor(Math.random() * 6) + 1;
+    sum += d(6);
   }
 
   return sum;
