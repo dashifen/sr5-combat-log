@@ -1,5 +1,6 @@
 <script>
 export default {
+  watcher: null,
   name: 'character',
   props: ['dataCharacter', 'dataIndex'],
   computed: {
@@ -53,6 +54,13 @@ export default {
         this.$store.commit('removeCharacter', characterName);
       }
     }
+  },
+
+  mounted() {
+    this.$watch(
+        () => this.$store.state.phase,
+        () => { this.$refs.acted.checked = false }
+    );
   }
 };
 </script>
@@ -72,7 +80,7 @@ export default {
       <input type="text" :value="this.character.roll"
         @change="setRoll" :disabled="!isPlayer"></td>
     <td headers="acted">
-      <input type="checkbox" tabindex="-1">
+      <input type="checkbox" ref="acted" tabindex="-1">
     </td>
     <td headers="interrupts">
       <select @change="interrupt" tabindex="-1">

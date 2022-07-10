@@ -4,6 +4,11 @@ import character from './character.vue';
 export default {
   name: 'combat-log',
   components: {character},
+  computed: {
+    phase() {
+      return this.$store.state.phase;
+    }
+  },
   methods: {
     addGoon() {
 
@@ -60,7 +65,8 @@ export default {
   <button type="button" @click="addGoon">Add Grunt</button>
   <button type="button" @click="addLieutenant">Add Lieutenant</button>
   <button type="button" @click="sort">Sort</button>
-  <button type="button" @click="endPhase">End Phase</button>
+  <button type="button" @click="endPhase">End Phase {{ phase }}</button>
+
 </template>
 
 <style lang="scss">
