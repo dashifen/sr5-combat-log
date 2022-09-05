@@ -59,7 +59,9 @@ export default {
   mounted() {
     this.$watch(
         () => this.$store.state.phase,
-        () => { this.$refs.acted.checked = false }
+        () => {
+          this.$refs.acted.checked = false;
+        }
     );
   }
 };
@@ -70,15 +72,15 @@ export default {
     <td headers="character" v-text="dataCharacter.name"></td>
     <td headers="init">
       <input type="number" :value="this.character.initiative"
-        @change="setInitiative" min="2" max="25" step="1" :disabled="isPlayer">
+          @change="setInitiative" min="2" max="25" step="1" :disabled="isPlayer">
     </td>
     <td headers="dice">
       <input type="number" :value="this.character.dice"
-        @change="setDice" min="1" max="5" step="1" :disabled="isPlayer">
+          @change="setDice" min="1" max="5" step="1" :disabled="isPlayer">
     </td>
     <td headers="roll">
       <input type="text" :value="this.character.roll"
-        @change="setRoll" :disabled="!isPlayer"></td>
+          @change="setRoll" :disabled="!isPlayer"></td>
     <td headers="acted">
       <input type="checkbox" ref="acted" tabindex="-1">
     </td>
@@ -93,7 +95,7 @@ export default {
     </td>
     <td headers="damage">
       <input type="number" :value="this.character.damage"
-        @change="setDamage" min="0" max="20" tabindex="-1">
+          @change="setDamage" min="0" max="20" tabindex="-1">
     </td>
     <td headers="initiative" v-text="this.character.score"></td>
     <td headers="notes">
@@ -105,7 +107,7 @@ export default {
   </tr>
 </template>
 
-<style lang="scss">
+<style>
 .remover {
   cursor: pointer;
   display: inline-block;
@@ -113,14 +115,13 @@ export default {
   text-align: right;
   text-decoration: underline;
   width: 100%;
+}
 
-  &:hover {
-    color: red;
-  }
+.remover:hover {
+  color: red;
 }
 
 input[type=number][disabled] {
   display: none;
 }
-
 </style>

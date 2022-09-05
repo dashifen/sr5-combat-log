@@ -41,24 +41,24 @@ export default {
   <table>
     <caption>Phase {{ this.$store.state.phase }}</caption>
     <thead>
-    <tr>
-      <th scope="col" id="character">Character</th>
-      <th scope="col" id="init">Init</th>
-      <th scope="col" id="dice">Dice</th>
-      <th scope="col" id="roll">Roll</th>
-      <th scope="col" id="acted">Acted</th>
-      <th scope="col" id="interrupts">Interrupts</th>
-      <th scope="col" id="damage">Damage</th>
-      <th scope="col" id="initiative">Initiative</th>
-      <th scope="col" id="notes">Notes</th>
-      <th scope="col" id="remover"></th>
-    </tr>
+      <tr>
+        <th scope="col" id="character">Character</th>
+        <th scope="col" id="init">Init</th>
+        <th scope="col" id="dice">Dice</th>
+        <th scope="col" id="roll">Roll</th>
+        <th scope="col" id="acted">Acted</th>
+        <th scope="col" id="interrupts">Interrupts</th>
+        <th scope="col" id="damage">Damage</th>
+        <th scope="col" id="initiative">Initiative</th>
+        <th scope="col" id="notes">Notes</th>
+        <th scope="col" id="remover"></th>
+      </tr>
     </thead>
     <tbody>
-    <tr is="vue:character" v-for="(character, index) in this.$store.state.characters"
-        :data-character="character"
-        :data-index="index">
-    </tr>
+      <tr is="vue:character" v-for="(character, index) in this.$store.state.characters"
+          :data-character="character"
+          :data-index="index">
+      </tr>
     </tbody>
   </table>
 
@@ -69,7 +69,7 @@ export default {
 
 </template>
 
-<style lang="scss">
+<style>
 table {
   border: 1px solid black;
   border-collapse: collapse;
@@ -86,15 +86,14 @@ thead th {
   vertical-align: bottom;
 }
 
-tbody tr {
-  &:hover {
-    background: antiquewhite;
-  }
+tbody tr:hover {
+  background: antiquewhite;
+}
 
-  td, th {
-    border-top: 1px solid black;
-    vertical-align: top;
-  }
+tbody tr td,
+tbody tr th {
+  border-top: 1px solid black;
+  vertical-align: top;
 }
 
 th#acted,

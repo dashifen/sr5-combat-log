@@ -1,0 +1,74 @@
+
+.remover {
+  cursor: pointer;
+  display: inline-block;
+  grid-area: remover;
+  text-align: right;
+  text-decoration: underline;
+  width: 100%;
+}
+.remover:hover {
+  color: red;
+}
+input[type=number][disabled] {
+  display: none;
+}
+
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-bottom: .5rem;
+  width: 100%;
+}
+td, th {
+  padding: .25rem;
+  text-align: left;
+}
+thead th {
+  vertical-align: bottom;
+}
+tbody tr:hover {
+  background: antiquewhite;
+}
+tbody tr td,
+tbody tr th {
+  border-top: 1px solid black;
+  vertical-align: top;
+}
+th#acted,
+th#initiative,
+[headers=acted],
+[headers=initiative] {
+  text-align: center;
+}
+[headers=roll] input,
+input[type=number] {
+  width: 50px;
+}
+th#interrupts,
+[headers=interrupts] {
+  width: 200px;
+}
+th#acted,
+th#damage,
+th#initiative,
+[headers=acted],
+[headers=damage],
+[headers=initiative] {
+  width: 100px;
+}
+[headers=notes] input {
+  width: 100%;
+}
+button {
+  font-size: .75rem;
+  margin-right: .25rem;
+  padding: .15rem .25rem;
+}
+button + button {
+  margin-left: .25rem;
+}
+
+
+/*# sourceMappingURL=sr5-combat-log.css.map*/
