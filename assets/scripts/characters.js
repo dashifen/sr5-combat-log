@@ -2,7 +2,7 @@ export const characters = {
   players: [
     {
       type: 'pc',
-      name: 'Doc',
+      name: 'Cipher',
       initiative: 0,
       dice: 0,
       roll: 0,
@@ -15,7 +15,7 @@ export const characters = {
     },
     {
       type: 'pc',
-      name: 'Donut',
+      name: 'Locke',
       initiative: 0,
       dice: 0,
       roll: 0,
@@ -28,7 +28,7 @@ export const characters = {
     },
     {
       type: 'pc',
-      name: 'Dylan',
+      name: 'PawPaw',
       initiative: 0,
       dice: 0,
       roll: 0,
@@ -41,7 +41,7 @@ export const characters = {
     },
     {
       type: 'pc',
-      name: 'Loki',
+      name: 'Sonya',
       initiative: 0,
       dice: 0,
       roll: 0,
@@ -54,7 +54,7 @@ export const characters = {
     },
     {
       type: 'pc',
-      name: 'Sylvie',
+      name: 'Tomoyo',
       initiative: 0,
       dice: 0,
       roll: 0,
@@ -67,7 +67,7 @@ export const characters = {
     },
     {
       type: 'pc',
-      name: 'Zee',
+      name: 'Waver',
       initiative: 0,
       dice: 0,
       roll: 0,
