@@ -8,15 +8,15 @@
   },
   "author": "David Dashifen Kees <dashifen@dashifen.com>",
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.2",
-    "css-loader": "^6.7",
+    "@vue/compiler-sfc": "^3.4",
+    "css-loader": "^6.9",
     "mini-css-extract-plugin": "^2.7",
-    "vue": "^3.2",
-    "vue-loader": "^17.0",
+    "vue": "^3.4",
+    "vue-loader": "^17.4",
     "vue-style-loader": "^4.1",
     "vuex": "^4.1",
-    "webpack": "^5.79",
-    "webpack-cli": "^5.0"
+    "webpack": "^5.89",
+    "webpack-cli": "^5.1"
   },
   "scripts": {
     "watch": "webpack --env development --watch",

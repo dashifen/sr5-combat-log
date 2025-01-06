@@ -13,9 +13,9 @@ export const characters = {
       notes: '',
       score: 0,
     },
-    {
+    /*{
       type: 'pc',
-      name: 'Locke',
+      name: 'KC',
       initiative: 0,
       dice: 0,
       roll: 0,
@@ -23,9 +23,9 @@ export const characters = {
       damage: 0,
       highPainTolerance: 0,
       lowPainTolerance: false,
-      notes: '',
+      notes: 'Adrenaline Surge!',
       score: 0,
-    },
+    },*/
     {
       type: 'pc',
       name: 'PawPaw',
@@ -79,11 +79,11 @@ export const characters = {
       score: 0,
     }
   ],
-
+  
   addCharacter(name) {
     const baseInitiative = 2;
     const roll = baseInitiative + Math.floor(Math.random() * 6) + 1;
-
+    
     return {
       type: 'npc',
       name: name,
